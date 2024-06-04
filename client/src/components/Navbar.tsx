@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import clsx from "clsx";
 import {
@@ -14,7 +15,7 @@ import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
@@ -22,8 +23,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import { useRouter } from "next/router";
-
+import { useRouter } from "next/navigation";
+import { Button, ListItemButton } from "@mui/material";
 const menuItems = [
   { text: "Главная", href: "/" },
   { text: "Список треков", href: "/tracks" },
@@ -47,14 +48,9 @@ export default function Navbar() {
       <CssBaseline />
       <AppBar position="fixed">
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-          >
-            <MenuIcon open={false} />
-          </IconButton>
+          <Button variant="outlined" onClick={handleDrawerOpen}>
+            <MenuIcon color="action" />
+          </Button>
           <Typography variant="h6" noWrap component="div">
             Persistent drawer
           </Typography>
@@ -68,12 +64,12 @@ export default function Navbar() {
         </div>
         <List>
           {menuItems.map(({ text, href }, index) => (
-            <ListItem button key={href} onClick={() => router.push(href)}>
+            <ListItemButton key={href} onClick={() => router.push(href)}>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
               <ListItemText primary={text} />
-            </ListItem>
+            </ListItemButton>
           ))}
         </List>
       </Drawer>

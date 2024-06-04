@@ -10,6 +10,7 @@ import {
 
 interface StepWrapperProps {
   activeStep: number;
+  children?: any;
 }
 const steps = ["Информация о треке", "Загрузите обложку", "Загрузите сам трек"];
 //@ts-ignore

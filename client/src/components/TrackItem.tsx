@@ -1,3 +1,4 @@
+"use client";
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
@@ -5,7 +6,7 @@ import { ITrack } from "../types/track";
 import { Card, Grid, IconButton } from "@mui/material";
 import styles from "../styles/TrackItem.module.scss";
 import { Delete, Pause, PlayArrow } from "@mui/icons-material";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useActions } from "../hooks/useActions";
 
 interface TrackItemProps {
@@ -15,12 +16,12 @@ interface TrackItemProps {
 
 const TrackItem: React.FC<TrackItemProps> = ({ track, active = false }) => {
   const router = useRouter();
-  const { playTrack, pauseTrack, setActiveTrack } = useActions();
+  //const { playTrack, pauseTrack, setActiveTrack } = useActions();
 
   const play = (e: { stopPropagation: () => void }) => {
     e.stopPropagation();
-    setActiveTrack(track);
-    playTrack();
+    //setActiveTrack(track);
+    //playTrack();
   };
 
   return (
@@ -34,7 +35,7 @@ const TrackItem: React.FC<TrackItemProps> = ({ track, active = false }) => {
       <img
         width={70}
         height={70}
-        src={"http://localhost:5000/" + track.picture}
+        src={"http://localhost:3000/" + track.picture}
       />
       <Grid
         container
