@@ -1,9 +1,7 @@
-import Image from "next/image";
 import styles from "./page.module.css";
 import Navbar from "@/components/Navbar";
 import Player from "@/components/Player";
 import TrackList from "@/components/TrackList";
-import { FileUpload } from "@mui/icons-material";
 
 export default function Home() {
   return (
@@ -33,8 +31,6 @@ export default function Home() {
           },
         ]}
       ></TrackList>
-      <Player></Player>
-      <FileUpload></FileUpload>
     </>
   );
 }
