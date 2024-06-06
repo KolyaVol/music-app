@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import MainLayout from "../../layouts/MainLayout";
-import StepWrapper from "../../components/StepWrapper";
+import MainLayout from "../../../layouts/MainLayout";
+import StepWrapper from "../../../components/StepWrapper";
 import { Button, Grid, TextField } from "@mui/material";
-import FileUpload from "../../components/FileUpload";
-import { useInput } from "../../hooks/useInput";
+import FileUpload from "../../../components/FileUpload";
+import { useInput } from "../../../hooks/useInput";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 

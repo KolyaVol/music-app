@@ -1,7 +1,8 @@
+"use client";
 import React from "react";
 import MainLayout from "../../layouts/MainLayout";
 import { Box, Button, Card, Grid } from "@mui/material";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { ITrack } from "../../types/track";
 import TrackList from "../../components/TrackList";
 import Player from "../../components/Player";

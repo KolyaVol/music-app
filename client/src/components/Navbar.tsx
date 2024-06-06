@@ -34,7 +34,7 @@ export default function Navbar() {
 
   return (
     <>
-      <AppBar position="fixed">
+      <AppBar color="inherit" position="fixed">
         <Toolbar>
           <Button variant="outlined" onClick={handleDrawerOpen}>
             <MenuIcon color="action" />
