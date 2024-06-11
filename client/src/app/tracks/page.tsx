@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { ITrack } from "../../types/track";
 import TrackList from "../../components/TrackList";
 import Player from "../../components/Player";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from "../../hooks/useActions";
 import { NextThunkDispatch, wrapper } from "../../store";
 import { fetchTracks } from "../../store/actions-creators/track";

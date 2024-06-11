@@ -5,7 +5,7 @@ import { Grid, IconButton } from "@mui/material";
 import styles from "../styles/Player.module.scss";
 import { ITrack } from "../types/track";
 import TrackProgress from "./TrackProgress";
-import { useTypedSelector } from "../hooks/useTypedSelector";
+import { useTypedSelector } from "../hooks/useTypedRTK";
 import { useActions } from "../hooks/useActions";
 
 let audio: HTMLAudioElement;
