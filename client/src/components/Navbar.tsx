@@ -14,6 +14,7 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { useRouter } from "next/navigation";
 import { Button, ListItemButton } from "@mui/material";
+import Link from "next/link";
 const menuItems = [
   { text: "Главная", href: "/" },
   { text: "Список треков", href: "/tracks" },
@@ -35,13 +36,27 @@ export default function Navbar() {
   return (
     <>
       <AppBar color="inherit" position="fixed">
-        <Toolbar>
-          <Button variant="outlined" onClick={handleDrawerOpen}>
-            <MenuIcon color="action" />
+        <Toolbar
+          sx={{
+            padding: "0 10rem",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <Link href={"/"} style={{ textDecoration: "none", color: "inherit" }}>
+            <Typography
+              sx={{ textDecoration: "none" }}
+              variant="h6"
+              noWrap
+              component="div"
+            >
+              Music App
+            </Typography>
+          </Link>
+
+          <Button>
+            <MenuIcon color="action" onClick={handleDrawerOpen} />
           </Button>
-          <Typography variant="h6" noWrap component="div">
-            Persistent drawer
-          </Typography>
         </Toolbar>
       </AppBar>
       <Drawer variant="persistent" anchor="left" open={open}>
