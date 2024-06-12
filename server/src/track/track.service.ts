@@ -42,6 +42,7 @@ export class TrackService {
 
   async delete(id: ObjectId): Promise<ObjectId> {
     const track = await this.trackModel.findByIdAndDelete(id);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
     return track._id;
   }
@@ -49,6 +50,7 @@ export class TrackService {
   async addComment(dto: CreateCommentDto): Promise<Comment> {
     const track = await this.trackModel.findById(dto.trackId);
     const comment = await this.commentModel.create({ ...dto });
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
     track.comments.push(comment._id);
     await track.save();
