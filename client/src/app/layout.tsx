@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import styles from "./page.module.css";
+import { Provider } from "react-redux";
+import { makeStore } from "@/store/store";
+import StoreProvider from "./StoreProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,8 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={styles.padd}>
-        <Navbar></Navbar>
-        {children}
+        <StoreProvider count={0}>
+          <Navbar></Navbar>
+          {children}
+        </StoreProvider>
       </body>
     </html>
   );

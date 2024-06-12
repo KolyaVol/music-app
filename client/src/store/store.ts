@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { tracksSlice } from "./slices/TrackSlice";
 
 export const makeStore = () => {
   return configureStore({
-    reducer: {},
+    reducer: { tracks: tracksSlice.reducer },
   });
 };
 
