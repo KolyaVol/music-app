@@ -56,10 +56,10 @@ const Player = () => {
   const play = () => {
     if (pause) {
       // playTrack();
-      audio.play();
+      //audio.play();
     } else {
       // pauseTrack();
-      audio.pause();
+      //audio.pause();
     }
   };
 

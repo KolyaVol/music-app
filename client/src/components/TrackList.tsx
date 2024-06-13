@@ -9,12 +9,13 @@ import { fetchTracks } from "@/store/actions-creators/track";
 const TrackList: React.FC = () => {
   const dispatch = useAppDispatch();
   const tracks = useAppSelector((state) => state.tracks.tracks);
+
   const isLoading = useAppSelector((state) => state.tracks.isLoading);
   const error = useAppSelector((state) => state.tracks.error);
 
   useEffect(() => {
-    dispatch(() => fetchTracks());
-  }, [dispatch]);
+    fetchTracks(dispatch);
+  }, []);
 
   if (isLoading) {
     return <div>Загрузка...</div>;
