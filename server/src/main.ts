@@ -5,7 +5,7 @@ async function bootstrap() {
   try {
     const app = await NestFactory.create(AppModule);
     app.enableCors();
-    await app.listen(3000);
+    await app.listen(5000);
   } catch (error) {
     console.log(error);
   }
