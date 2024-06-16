@@ -10,26 +10,6 @@ interface IInitialState {
 
 const initialState = {
   tracks: [
-    {
-      _id: "string",
-      name: "string",
-      artist: "string",
-      text: "string",
-      listens: 0,
-      picture: "string",
-      audio: "string",
-      comments: [{ _id: "string", username: "string", text: "string" }],
-    },
-    {
-      _id: "string1",
-      name: "string1",
-      artist: "string1",
-      text: "string1",
-      listens: 0,
-      picture: "string",
-      audio: "string",
-      comments: [{ _id: "string", username: "string", text: "string" }],
-    },
   ],
   isLoading: false,
   error: null,

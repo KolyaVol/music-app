@@ -7,7 +7,6 @@ import { Card, Grid, IconButton } from "@mui/material";
 import styles from "../styles/TrackItem.module.scss";
 import { Delete, Pause, PlayArrow } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
-import { useActions } from "../hooks/useActions";
 
 interface TrackItemProps {
   track: ITrack;
@@ -16,7 +15,6 @@ interface TrackItemProps {
 
 const TrackItem: React.FC<TrackItemProps> = ({ track, active = false }) => {
   const router = useRouter();
-  //const { playTrack, pauseTrack, setActiveTrack } = useActions();
 
   const play = (e: { stopPropagation: () => void }) => {
     e.stopPropagation();
@@ -35,7 +33,7 @@ const TrackItem: React.FC<TrackItemProps> = ({ track, active = false }) => {
       <img
         width={70}
         height={70}
-        src={"http://localhost:3000/" + track.picture}
+        src={"http://localhost:5000/" + track.picture}
       />
       <Grid
         container

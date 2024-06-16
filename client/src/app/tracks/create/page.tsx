@@ -33,7 +33,7 @@ const Create = () => {
       }
 
       axios
-        .post("http://localhost:3000/tracks", formData)
+        .post("http://localhost:5000/tracks", formData)
         .then((resp) => router.push("/tracks"))
         .catch((e) => console.log(e));
     }
