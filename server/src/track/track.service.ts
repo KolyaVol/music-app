@@ -41,6 +41,7 @@ export class TrackService {
   }
 
   async delete(id: ObjectId): Promise<ObjectId> {
+    console.log(this.trackModel.findById(id));
     const track = await this.trackModel.findByIdAndDelete(id);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore

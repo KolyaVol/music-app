@@ -6,9 +6,14 @@ import configuration from './configuration';
 import { TrackModule } from './track/track.module';
 import { FileModule } from './file/file.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { resolve } from 'path';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: resolve(__dirname, 'static'),
+    }),
     ConfigModule.forRoot({ isGlobal: true, load: [configuration] }),
     TrackModule,
     FileModule,
