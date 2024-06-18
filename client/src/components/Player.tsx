@@ -6,7 +6,6 @@ import styles from "../styles/Player.module.scss";
 import { ITrack } from "../types/track";
 import TrackProgress from "./TrackProgress";
 import { useTypedSelector } from "../hooks/useTypedRTK";
-import { useActions } from "../hooks/useActions";
 
 let audio: HTMLAudioElement;
 
@@ -18,7 +17,11 @@ const Player = () => {
   const { pause, volume, active, duration, currentTime } = {
     pause: true,
     volume: 1,
-    active: { name: "name", artist: "artist", audio: "audio" },
+    active: {
+      name: "name",
+      artist: "artist",
+      audio: "audio/2e269cb3-ac35-419b-8461-42bb49231b8c.mp3",
+    },
     duration: 100,
     currentTime: 0,
   };
@@ -54,12 +57,14 @@ const Player = () => {
   };
 
   const play = () => {
+    console.log(audio);
+
     if (pause) {
       // playTrack();
-      //audio.play();
+      audio.play();
     } else {
       // pauseTrack();
-      //audio.pause();
+      audio.pause();
     }
   };
 

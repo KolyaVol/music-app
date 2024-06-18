@@ -1,16 +1,13 @@
 import { ITrack } from "@/types/track";
-import { configureStore } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 interface IInitialState {
   tracks: [ITrack] | [];
   isLoading: boolean;
   error: any;
 }
 
-const initialState = {
-  tracks: [
-  ],
+const initialState: IInitialState = {
+  tracks: [],
   isLoading: false,
   error: null,
 };

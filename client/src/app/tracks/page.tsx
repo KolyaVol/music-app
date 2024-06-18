@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { ITrack } from "../../types/track";
 import TrackList from "../../components/TrackList";
 import Player from "../../components/Player";
-import { useActions } from "../../hooks/useActions";
 import { fetchTracks } from "../../store/actions-creators/track";
 
 const Index = () => {
