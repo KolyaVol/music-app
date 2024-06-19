@@ -7,6 +7,7 @@ import { Card, Grid, IconButton } from "@mui/material";
 import styles from "../styles/TrackItem.module.scss";
 import { Delete, Pause, PlayArrow } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
+import { deleteTrack } from "@/store/actions-creators/track";
 
 interface TrackItemProps {
   track: ITrack;
@@ -20,6 +21,10 @@ const TrackItem: React.FC<TrackItemProps> = ({ track, active = false }) => {
     e.stopPropagation();
     //setActiveTrack(track);
     //playTrack();
+  };
+  const delTrack = (e: { stopPropagation: () => void }) => {
+    e.stopPropagation();
+    deleteTrack(track._id);
   };
 
   return (
@@ -44,10 +49,7 @@ const TrackItem: React.FC<TrackItemProps> = ({ track, active = false }) => {
         <div style={{ fontSize: 12, color: "gray" }}>{track.artist}</div>
       </Grid>
       {active && <div>02:42 / 03:22</div>}
-      <IconButton
-        onClick={(e) => e.stopPropagation()}
-        style={{ marginLeft: "auto" }}
-      >
+      <IconButton onClick={(e) => delTrack(e)} style={{ marginLeft: "auto" }}>
         <Delete />
       </IconButton>
     </Card>

@@ -20,7 +20,7 @@ const Player = () => {
     active: {
       name: "name",
       artist: "artist",
-      audio: "audio/2e269cb3-ac35-419b-8461-42bb49231b8c.mp3",
+      audio: "",
     },
     duration: 100,
     currentTime: 0,
@@ -45,7 +45,7 @@ const Player = () => {
 
   const setAudio = () => {
     if (active) {
-      audio.src = "http://localhost:5000/" + active.audio;
+      audio.src = "http://localhost:5000/audio/" + active.audio;
       audio.volume = volume / 100;
       // audio.onloadedmetadata = () => {
       //   setDuration(Math.ceil(audio.duration));
