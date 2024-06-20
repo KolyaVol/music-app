@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 
 const Create = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [picture, setPicture] = useState(null);
+  const [picture, setPicture] = useState<null | File>(null);
   const [audio, setAudio] = useState(null);
   const name = useInput("");
   const artist = useInput("");
@@ -22,7 +22,12 @@ const Create = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(1111111111);
+
     setSelectedFiles(Array.from(event.target.files || []));
+    if (event.target.files) {
+      setPicture(event.target.files[0]);
+    }
   };
 
   const handleClick = () => {
@@ -91,12 +96,12 @@ const Create = () => {
               multiple
               accept="image/"
               style={{ display: "none" }}
-              onChange={handleFileChange}
+              onChange={(e) => handleFileChange(e)}
             />
-            <button onClick={handleClick}>Select some files</button>
+            <Button onClick={handleClick}>Загрузить картинку</Button>
             <div>
               {selectedFiles.length === 0 ? (
-                <p>No files selected!</p>
+                <></>
               ) : (
                 <img
                   src={URL.createObjectURL(selectedFiles[0])}
