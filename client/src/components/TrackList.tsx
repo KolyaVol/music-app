@@ -15,7 +15,6 @@ const TrackList: React.FC = () => {
 
   useEffect(() => {
     fetchTracks(dispatch);
-    console.log(tracks);
   }, []);
 
   if (isLoading) {

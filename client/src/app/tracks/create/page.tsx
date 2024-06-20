@@ -1,5 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import MainLayout from "../../../layouts/MainLayout";
 import StepWrapper from "../../../components/StepWrapper";
 import { Button, Grid, TextField } from "@mui/material";
@@ -10,12 +11,32 @@ import { useRouter } from "next/navigation";
 
 const Create = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [picture, setPicture] = useState(null);
+  const [picture, setPicture] = useState<null | File>(null);
   const [audio, setAudio] = useState(null);
   const name = useInput("");
   const artist = useInput("");
   const text = useInput("");
   const router = useRouter();
+
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(1111111111);
+
+    setSelectedFiles(Array.from(event.target.files || []));
+    if (event.target.files) {
+      setPicture(event.target.files[0]);
+    }
+  };
+
+  const handleClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  // const handleLoadImg = () => {
+  //   URL.revokeObjectURL(this.src);
+  // };
 
   const next = () => {
     if (activeStep !== 2) {
@@ -68,9 +89,28 @@ const Create = () => {
           </Grid>
         )}
         {activeStep === 1 && (
-          <FileUpload setFile={setPicture} accept="image/*">
-            <Button>Загрузить изображение</Button>
-          </FileUpload>
+          <div>
+            <input
+              type="file"
+              ref={fileInputRef}
+              multiple
+              accept="image/"
+              style={{ display: "none" }}
+              onChange={(e) => handleFileChange(e)}
+            />
+            <Button onClick={handleClick}>Загрузить картинку</Button>
+            <div>
+              {selectedFiles.length === 0 ? (
+                <></>
+              ) : (
+                <img
+                  src={URL.createObjectURL(selectedFiles[0])}
+                  alt={selectedFiles[0].name}
+                  height={150}
+                />
+              )}
+            </div>
+          </div>
         )}
         {activeStep === 2 && (
           <FileUpload setFile={setAudio} accept="audio/*">

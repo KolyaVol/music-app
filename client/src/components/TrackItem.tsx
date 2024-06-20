@@ -7,6 +7,10 @@ import { Card, Grid, IconButton } from "@mui/material";
 import styles from "../styles/TrackItem.module.scss";
 import { Delete, Pause, PlayArrow } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
+import { deleteTrack } from "@/store/actions-creators/track";
+import { useAppDispatch } from "@/hooks/useTypedRTK";
+import { changePauseState, setActive } from "@/store/slices/PlayerSlice";
+import Image from "next/image";
 
 interface TrackItemProps {
   track: ITrack;
@@ -15,11 +19,17 @@ interface TrackItemProps {
 
 const TrackItem: React.FC<TrackItemProps> = ({ track, active = false }) => {
   const router = useRouter();
-
+  const dispatch = useAppDispatch();
   const play = (e: { stopPropagation: () => void }) => {
     e.stopPropagation();
-    //setActiveTrack(track);
-    //playTrack();
+    dispatch(
+      setActive({ name: track.name, artist: track.artist, audio: track.audio }),
+      changePauseState()
+    );
+  };
+  const delTrack = (e: { stopPropagation: () => void }) => {
+    e.stopPropagation();
+    deleteTrack(track._id);
   };
 
   return (
@@ -30,10 +40,11 @@ const TrackItem: React.FC<TrackItemProps> = ({ track, active = false }) => {
       <IconButton onClick={play}>
         {!active ? <PlayArrow /> : <Pause />}
       </IconButton>
-      <img
+      <Image
         width={70}
         height={70}
         src={"http://localhost:5000/" + track.picture}
+        alt={track.name}
       />
       <Grid
         container
@@ -44,10 +55,7 @@ const TrackItem: React.FC<TrackItemProps> = ({ track, active = false }) => {
         <div style={{ fontSize: 12, color: "gray" }}>{track.artist}</div>
       </Grid>
       {active && <div>02:42 / 03:22</div>}
-      <IconButton
-        onClick={(e) => e.stopPropagation()}
-        style={{ marginLeft: "auto" }}
-      >
+      <IconButton onClick={(e) => delTrack(e)} style={{ marginLeft: "auto" }}>
         <Delete />
       </IconButton>
     </Card>

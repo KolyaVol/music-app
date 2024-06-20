@@ -5,26 +5,26 @@ import { Grid, IconButton } from "@mui/material";
 import styles from "../styles/Player.module.scss";
 import { ITrack } from "../types/track";
 import TrackProgress from "./TrackProgress";
-import { useTypedSelector } from "../hooks/useTypedRTK";
+import { useAppSelector } from "../hooks/useTypedRTK";
 
 let audio: HTMLAudioElement;
 
 const Player = () => {
-  //   const { pause, volume, active, duration, currentTime } = useTypedSelector(
-  //     (state) => state.player
-  //   );
+  const { pause, volume, active, duration, currentTime } = useAppSelector(
+    (state) => state.player
+  );
 
-  const { pause, volume, active, duration, currentTime } = {
-    pause: true,
-    volume: 1,
-    active: {
-      name: "name",
-      artist: "artist",
-      audio: "audio/2e269cb3-ac35-419b-8461-42bb49231b8c.mp3",
-    },
-    duration: 100,
-    currentTime: 0,
-  };
+  // const { pause, volume, active, duration, currentTime } = {
+  //   pause: true,
+  //   volume: 1,
+  //   active: {
+  //     name: "name",
+  //     artist: "artist",
+  //     audio: "",
+  //   },
+  //   duration: 100,
+  //   currentTime: 0,
+  // };
   //   const {
   //     pauseTrack,
   //     playTrack,
@@ -45,8 +45,8 @@ const Player = () => {
 
   const setAudio = () => {
     if (active) {
-      audio.src = "http://localhost:5000/" + active.audio;
-      audio.volume = volume / 100;
+      audio.src = "http://localhost:5000/audio/" + active.audio;
+      audio.volume = (volume as number) / 100;
       // audio.onloadedmetadata = () => {
       //   setDuration(Math.ceil(audio.duration));
       // };
@@ -95,12 +95,16 @@ const Player = () => {
         <div style={{ fontSize: 12, color: "gray" }}>{active?.artist}</div>
       </Grid>
       <TrackProgress
-        left={currentTime}
-        right={duration}
+        left={currentTime as number}
+        right={duration as number}
         onChange={changeCurrentTime}
       />
       <VolumeUp style={{ marginLeft: "auto" }} />
-      <TrackProgress left={volume} right={100} onChange={changeVolume} />
+      <TrackProgress
+        left={volume as number}
+        right={100}
+        onChange={changeVolume}
+      />
     </div>
   );
 };
