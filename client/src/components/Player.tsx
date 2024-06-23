@@ -11,6 +11,7 @@ import {
   changeVolume,
   changePauseState,
 } from "@/store/slices/PlayerSlice";
+import { normalizeSeconds } from "@/helpers/normalizeSeconds";
 
 let audio: HTMLAudioElement;
 
@@ -81,8 +82,10 @@ const Player = () => {
         <div style={{ fontSize: 12, color: "gray" }}>{active?.artist}</div>
       </Grid>
       <TrackProgress
-        left={currentTime as number}
-        right={duration as number}
+        left={currentTime}
+        right={duration}
+        nleft={normalizeSeconds(+currentTime)}
+        nright={normalizeSeconds(+duration)}
         onChange={changeCurrentPlayerTime}
       />
       <VolumeUp style={{ marginLeft: "auto" }} />

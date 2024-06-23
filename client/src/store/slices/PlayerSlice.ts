@@ -7,8 +7,8 @@ interface IPlayer {
     artist: string;
     audio: string;
   };
-  duration?: number;
-  currentTime?: number;
+  duration: number;
+  currentTime: number;
 }
 
 const initialState: IPlayer | null = {
