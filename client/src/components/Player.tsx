@@ -5,7 +5,13 @@ import { Grid, IconButton } from "@mui/material";
 import styles from "../styles/Player.module.scss";
 import { ITrack } from "../types/track";
 import TrackProgress from "./TrackProgress";
-import { useAppSelector } from "../hooks/useTypedRTK";
+import { useAppDispatch, useAppSelector } from "../hooks/useTypedRTK";
+import {
+  setDuration,
+  changeCurrentTime,
+  changeVolume,
+  changePauseState,
+} from "@/store/slices/PlayerSlice";
 
 let audio: HTMLAudioElement;
 
@@ -13,26 +19,7 @@ const Player = () => {
   const { pause, volume, active, duration, currentTime } = useAppSelector(
     (state) => state.player
   );
-
-  // const { pause, volume, active, duration, currentTime } = {
-  //   pause: true,
-  //   volume: 1,
-  //   active: {
-  //     name: "name",
-  //     artist: "artist",
-  //     audio: "",
-  //   },
-  //   duration: 100,
-  //   currentTime: 0,
-  // };
-  //   const {
-  //     pauseTrack,
-  //     playTrack,
-  //     setVolume,
-  //     setCurrentTime,
-  //     setDuration,
-  //     setActiveTrack,
-  //   } = useActions();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (!audio) {
@@ -45,36 +32,41 @@ const Player = () => {
 
   const setAudio = () => {
     if (active) {
-      audio.src = "http://localhost:5000/audio/" + active.audio;
+      audio.src = "http://localhost:5000/" + active.audio;
       audio.volume = (volume as number) / 100;
-      // audio.onloadedmetadata = () => {
-      //   setDuration(Math.ceil(audio.duration));
-      // };
-      // audio.ontimeupdate = () => {
-      //   // setCurrentTime(Math.ceil(audio.currentTime));
-      // };
+      audio.onloadedmetadata = () => {
+        dispatch(setDuration(Math.ceil(audio.duration)));
+      };
+      audio.ontimeupdate = () => {
+        console.log(1);
+
+        dispatch(changeCurrentTime(Math.ceil(audio.currentTime)));
+      };
     }
   };
 
   const play = () => {
-    console.log(audio);
-
     if (pause) {
-      // playTrack();
       audio.play();
+      dispatch(changePauseState(false));
     } else {
-      // pauseTrack();
       audio.pause();
+      dispatch(changePauseState(true));
     }
   };
 
-  const changeVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const changePlayerVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(volume);
     audio.volume = Number(e.target.value) / 100;
-    // setVolume(Number(e.target.value));
+    dispatch(changeVolume(+e.target.value * 100));
+    console.log(volume);
   };
-  const changeCurrentTime = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+  const changeCurrentPlayerTime = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(currentTime);
     audio.currentTime = Number(e.target.value);
-    // setCurrentTime(Number(e.target.value));
+    dispatch(changeCurrentTime(+e.target.value));
+    console.log(currentTime);
   };
 
   if (!active) {
@@ -97,13 +89,13 @@ const Player = () => {
       <TrackProgress
         left={currentTime as number}
         right={duration as number}
-        onChange={changeCurrentTime}
+        onChange={changeCurrentPlayerTime}
       />
       <VolumeUp style={{ marginLeft: "auto" }} />
       <TrackProgress
         left={volume as number}
         right={100}
-        onChange={changeVolume}
+        onChange={changePlayerVolume}
       />
     </div>
   );

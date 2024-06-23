@@ -41,6 +41,7 @@ const TrackItem: React.FC<TrackItemProps> = ({ track, active = false }) => {
         {!active ? <PlayArrow /> : <Pause />}
       </IconButton>
       <Image
+      style={{borderRadius: '0.25rem'}}
         width={70}
         height={70}
         src={"http://localhost:5000/" + track.picture}

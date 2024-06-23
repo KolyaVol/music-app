@@ -12,8 +12,8 @@ interface IPlayer {
 }
 
 const initialState: IPlayer | null = {
-  pause: true,
-  volume: 0,
+  pause: false,
+  volume: 50,
   duration: 0,
   currentTime: 0,
 };
@@ -27,8 +27,8 @@ export const playerSlice = createSlice({
     setDuration(state, action) {
       state.duration = action.payload;
     },
-    changePauseState(state) {
-      state.pause = !state.pause;
+    changePauseState(state, action) {
+      state.pause = action.payload;
     },
     changeVolume(state, action) {
       state.volume = action.payload / 100;

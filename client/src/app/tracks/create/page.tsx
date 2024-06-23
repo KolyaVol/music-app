@@ -22,8 +22,6 @@ const Create = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(1111111111);
-
     setSelectedFiles(Array.from(event.target.files || []));
     if (event.target.files) {
       setPicture(event.target.files[0]);
