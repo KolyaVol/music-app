@@ -18,7 +18,7 @@ const TrackPage = ({ serverTrack }) => {
   const addComment = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/tracks/comment",
+        "http://localhost:5000/tracks/comment",
         {
           username: username.value,
           text: text.value,
@@ -32,10 +32,7 @@ const TrackPage = ({ serverTrack }) => {
   };
 
   return (
-    <MainLayout
-      title={"Музыкальная площадка - " + track.name + " - " + track.artist}
-      keywords={"Музыка, артисты, " + track.name + ", " + track.artist}
-    >
+    <>
       <Button
         variant={"outlined"}
         style={{ fontSize: 32 }}
@@ -45,7 +42,7 @@ const TrackPage = ({ serverTrack }) => {
       </Button>
       <Grid container style={{ margin: "20px 0" }}>
         <Image
-          src={"http://localhost:3000/" + track.picture}
+          src={"http://localhost:5000/" + track.picture}
           width={200}
           height={200}
           alt="alt"
@@ -72,7 +69,7 @@ const TrackPage = ({ serverTrack }) => {
           </div>
         ))}
       </div>
-    </MainLayout>
+    </>
   );
 };
 
@@ -80,7 +77,7 @@ export default TrackPage;
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const response = await axios.get(
-    "http://localhost:3000/tracks/" + params?.id
+    "http://localhost:5000/tracks/" + params?.id
   );
   return {
     props: {

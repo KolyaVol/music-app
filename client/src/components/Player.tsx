@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { Pause, PlayArrow, VolumeUp } from "@mui/icons-material";
 import { Grid, IconButton } from "@mui/material";
 import styles from "../styles/Player.module.scss";
-import { ITrack } from "../types/track";
 import TrackProgress from "./TrackProgress";
 import { useAppDispatch, useAppSelector } from "../hooks/useTypedRTK";
 import {
@@ -36,10 +35,9 @@ const Player = () => {
       audio.volume = (volume as number) / 100;
       audio.onloadedmetadata = () => {
         dispatch(setDuration(Math.ceil(audio.duration)));
+        play();
       };
       audio.ontimeupdate = () => {
-        console.log(1);
-
         dispatch(changeCurrentTime(Math.ceil(audio.currentTime)));
       };
     }
@@ -56,17 +54,13 @@ const Player = () => {
   };
 
   const changePlayerVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(volume);
     audio.volume = Number(e.target.value) / 100;
     dispatch(changeVolume(+e.target.value * 100));
-    console.log(volume);
   };
 
   const changeCurrentPlayerTime = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(currentTime);
     audio.currentTime = Number(e.target.value);
     dispatch(changeCurrentTime(+e.target.value));
-    console.log(currentTime);
   };
 
   if (!active) {

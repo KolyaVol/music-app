@@ -1,7 +1,7 @@
 "use client";
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React, { useState } from "react";
 import { ITrack } from "../types/track";
 import { Card, Grid, IconButton } from "@mui/material";
 import styles from "../styles/TrackItem.module.scss";
@@ -18,21 +18,27 @@ interface TrackItemProps {
 }
 
 const TrackItem: React.FC<TrackItemProps> = ({ track, active = false }) => {
+  const [isDeleted, setIsDeleted] = useState(false);
   const router = useRouter();
   const dispatch = useAppDispatch();
+
   const play = (e: { stopPropagation: () => void }) => {
     e.stopPropagation();
     dispatch(
-      setActive({ name: track.name, artist: track.artist, audio: track.audio }),
-      changePauseState()
+      setActive({ name: track.name, artist: track.artist, audio: track.audio })
     );
+    dispatch(changePauseState(true));
   };
+
   const delTrack = (e: { stopPropagation: () => void }) => {
     e.stopPropagation();
     deleteTrack(track._id);
+    setIsDeleted(true);
   };
 
-  return (
+  return isDeleted ? (
+    <></>
+  ) : (
     <Card
       className={styles.track}
       onClick={() => router.push("/tracks/" + track._id)}
@@ -41,7 +47,7 @@ const TrackItem: React.FC<TrackItemProps> = ({ track, active = false }) => {
         {!active ? <PlayArrow /> : <Pause />}
       </IconButton>
       <Image
-      style={{borderRadius: '0.25rem'}}
+        style={{ borderRadius: "0.25rem" }}
         width={70}
         height={70}
         src={"http://localhost:5000/" + track.picture}

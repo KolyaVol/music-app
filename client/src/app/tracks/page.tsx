@@ -1,11 +1,9 @@
 "use client";
 import React from "react";
-import MainLayout from "../../layouts/MainLayout";
 import { Box, Button, Card, Grid } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { ITrack } from "../../types/track";
 import TrackList from "../../components/TrackList";
-import Player from "../../components/Player";
 import { fetchTracks } from "../../store/actions-creators/track";
 
 const Index = () => {
@@ -14,14 +12,14 @@ const Index = () => {
 
   //   if (error) {
   //     return (
-  //       <MainLayout>
+  //       <>
   //         <h1>{error}</h1>
-  //       </MainLayout>
+  //       </>
   //     );
   //   }
 
   return (
-    <MainLayout title={"Список треков - музыкальная площадка"}>
+    <>
       <Grid container justifyContent="center">
         <Card style={{ width: 900 }}>
           <Box p={3}>
@@ -62,7 +60,7 @@ const Index = () => {
           />
         </Card>
       </Grid>
-    </MainLayout>
+    </>
   );
 };
 

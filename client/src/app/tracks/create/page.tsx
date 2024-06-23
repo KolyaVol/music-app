@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useRef, useState } from "react";
-import MainLayout from "../../../layouts/MainLayout";
 import StepWrapper from "../../../components/StepWrapper";
 import { Button, Grid, TextField } from "@mui/material";
 import FileUpload from "../../../components/FileUpload";
@@ -63,7 +62,7 @@ const Create = () => {
   };
 
   return (
-    <MainLayout>
+    <>
       <StepWrapper activeStep={activeStep}>
         {activeStep === 0 && (
           <Grid container direction={"column"} style={{ padding: 20 }}>
@@ -122,7 +121,7 @@ const Create = () => {
         </Button>
         <Button onClick={next}>Далее</Button>
       </Grid>
-    </MainLayout>
+    </>
   );
 };
 
