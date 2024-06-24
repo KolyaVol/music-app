@@ -40,6 +40,10 @@ const Player = () => {
       };
       audio.ontimeupdate = () => {
         dispatch(changeCurrentTime(Math.ceil(audio.currentTime)));
+
+        if (audio.currentTime === audio.duration) {
+          dispatch(changePauseState(true));
+        }
       };
     }
   };
@@ -62,6 +66,9 @@ const Player = () => {
   const changeCurrentPlayerTime = (e: React.ChangeEvent<HTMLInputElement>) => {
     audio.currentTime = Number(e.target.value);
     dispatch(changeCurrentTime(+e.target.value));
+    if (audio.currentTime === audio.duration) {
+      dispatch(changePauseState(true));
+    }
   };
 
   if (!active) {
@@ -88,7 +95,7 @@ const Player = () => {
         nright={normalizeSeconds(+duration)}
         onChange={changeCurrentPlayerTime}
       />
-      <VolumeUp style={{ marginLeft: "auto" }} />
+      <VolumeUp />
       <TrackProgress
         left={volume as number}
         right={100}
