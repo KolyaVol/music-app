@@ -1,7 +1,7 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Pause, PlayArrow, VolumeUp } from "@mui/icons-material";
-import { Grid, IconButton } from "@mui/material";
+import { Button, Grid, IconButton } from "@mui/material";
 import styles from "../styles/Player.module.scss";
 import TrackProgress from "./TrackProgress";
 import { useAppDispatch, useAppSelector } from "../hooks/useTypedRTK";
@@ -12,18 +12,20 @@ import {
   changePauseState,
 } from "@/store/slices/PlayerSlice";
 import { normalizeSeconds } from "@/helpers/normalizeSeconds";
-
 let audio: HTMLAudioElement;
 
 const Player = () => {
   const { pause, volume, active, duration, currentTime } = useAppSelector(
     (state) => state.player
   );
+  const [error, setError] = useState(false);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (!audio) {
       audio = new Audio();
+      setAudio();
     } else {
       setAudio();
       play();
@@ -33,6 +35,10 @@ const Player = () => {
   const setAudio = () => {
     if (active) {
       audio.src = "http://localhost:5000/" + active.audio;
+
+      audio.onerror = () => {
+        setError(true);
+      };
       audio.volume = (volume as number) / 100;
       audio.onloadedmetadata = () => {
         dispatch(setDuration(Math.ceil(audio.duration)));
@@ -49,13 +55,15 @@ const Player = () => {
   };
 
   const play = () => {
-    if (pause) {
-      audio.play();
-      dispatch(changePauseState(false));
-    } else {
-      audio.pause();
-      dispatch(changePauseState(true));
-    }
+    if (!error) {
+      if (pause) {
+        audio.play();
+        dispatch(changePauseState(false));
+      } else {
+        audio.pause();
+        dispatch(changePauseState(true));
+      }
+    } else console.log(error);
   };
 
   const changePlayerVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,12 +82,12 @@ const Player = () => {
   if (!active) {
     return null;
   }
-
   return (
     <div className={styles.player}>
-      <IconButton onClick={play}>
+      <Button onClick={play} disabled={error}>
         {pause ? <PlayArrow /> : <Pause />}
-      </IconButton>
+      </Button>
+
       <Grid
         container
         direction="column"
@@ -95,12 +103,14 @@ const Player = () => {
         nright={normalizeSeconds(+duration)}
         onChange={changeCurrentPlayerTime}
       />
-      <VolumeUp />
-      <TrackProgress
-        left={volume as number}
-        right={100}
-        onChange={changePlayerVolume}
-      />
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <VolumeUp />
+        <TrackProgress
+          left={volume as number}
+          right={100}
+          onChange={changePlayerVolume}
+        />
+      </div>
     </div>
   );
 };
