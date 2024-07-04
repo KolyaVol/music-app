@@ -11,6 +11,7 @@ import { deleteTrack } from "@/store/actions-creators/track";
 import { useAppDispatch } from "@/hooks/useTypedRTK";
 import { changePauseState, setActive } from "@/store/slices/PlayerSlice";
 import Image from "next/image";
+import { setCurrentTrack } from "@/store/slices/CurrentTrackSlice";
 
 interface TrackItemProps {
   track: ITrack;
@@ -36,13 +37,15 @@ const TrackItem: React.FC<TrackItemProps> = ({ track, active = false }) => {
     setIsDeleted(true);
   };
 
+  const navigateToTrackPage = () => {
+    dispatch(setCurrentTrack(track));
+    router.push("/tracks/" + track._id);
+  };
+
   return isDeleted ? (
     <></>
   ) : (
-    <Card
-      className={styles.track}
-      onClick={() => router.push("/tracks/" + track._id)}
-    >
+    <Card className={styles.track} onClick={navigateToTrackPage}>
       <IconButton onClick={play}>
         {!active ? <PlayArrow /> : <Pause />}
       </IconButton>

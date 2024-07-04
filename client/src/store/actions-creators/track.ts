@@ -3,7 +3,7 @@ import {
   fetchTracksFailure,
   fetchTracksStart,
   fetchTracksSuccess,
-} from "../slices/TrackSlice";
+} from "../slices/TracksSlice";
 
 export const fetchTracks = async (dispatch: any) => {
   dispatch(fetchTracksStart());

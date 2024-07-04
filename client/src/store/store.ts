@@ -1,10 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { tracksSlice } from "./slices/TrackSlice";
+import { tracksSlice } from "./slices/TracksSlice";
 import { playerSlice } from "./slices/PlayerSlice";
+import { currentTrackSlice } from "./slices/CurrentTrackSlice";
 
 export const makeStore = () => {
   return configureStore({
-    reducer: { tracks: tracksSlice.reducer, player: playerSlice.reducer },
+    reducer: {
+      tracks: tracksSlice.reducer,
+      currentTrack: currentTrackSlice.reducer,
+      player: playerSlice.reducer,
+    },
   });
 };
 

@@ -1,35 +1,44 @@
 "use client";
 import React, { useState } from "react";
-import { ITrack } from "../../types/track";
 import { Button, Grid, TextField } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { GetServerSideProps } from "next";
-import axios from "axios";
-import { useInput } from "../../hooks/useInput";
+import { useInput } from "../../../hooks/useInput";
 import Image from "next/image";
+import { useAppSelector } from "@/hooks/useTypedRTK";
 //@ts-ignore
-const TrackPage = ({ serverTrack }) => {
-  const [track, setTrack] = useState<ITrack>(serverTrack);
+const TrackPage = () => {
+  const track = useAppSelector((state) => state.currentTrack.track);
   const router = useRouter();
   const username = useInput("");
   const text = useInput("");
 
-  const addComment = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/tracks/comment",
-        {
-          username: username.value,
-          text: text.value,
-          trackId: track._id,
-        }
-      );
-      setTrack({ ...track, comments: [...track.comments, response.data] });
-    } catch (e) {
-      console.log(e);
-    }
+  // const addComment = async () => {
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:5000/tracks/comment",
+  //       {
+  //         username: username.value,
+  //         text: text.value,
+  //         trackId: track._id,
+  //       }
+  //     );
+  //     setTrack({ ...track, comments: [...track.comments, response.data] });
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+  const addComment = () => {
+    console.log("add comment");
   };
 
+  if (!track) {
+    return (
+      <>
+        <h2>Oops, can`t find track</h2>
+        <Button onClick={() => router.push("/tracks")}>Go back</Button>
+      </>
+    );
+  }
   return (
     <>
       <Button
@@ -73,14 +82,3 @@ const TrackPage = ({ serverTrack }) => {
 };
 
 export default TrackPage;
-
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const response = await axios.get(
-    "http://localhost:5000/tracks/" + params?.id
-  );
-  return {
-    props: {
-      serverTrack: response.data,
-    },
-  };
-};
