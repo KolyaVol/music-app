@@ -25,22 +25,13 @@ export default function Navbar() {
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
 
-  const setBurgerClosed = setTimeout(() => {
-    console.log(1);
-
-    setOpen(false);
-  }, 300);
-
   const handleDrawerOpen = () => {
     setOpen(true);
-    clearTimeout(setBurgerClosed);
   };
 
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  document.addEventListener("click", () => setBurgerClosed);
 
   return (
     <>
@@ -72,7 +63,7 @@ export default function Navbar() {
         </Grid>
         <Grid xs></Grid>
       </AppBar>
-      <Drawer variant="persistent" anchor="left" open={open}>
+      <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
         <div>
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
