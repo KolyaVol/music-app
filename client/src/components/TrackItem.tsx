@@ -4,7 +4,6 @@
 import React, { useState } from "react";
 import { ITrack } from "../types/track";
 import { Card, Grid, IconButton } from "@mui/material";
-import styles from "../styles/TrackItem.module.scss";
 import { Delete, Pause, PlayArrow } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import { deleteTrack } from "@/store/actions-creators/track";
@@ -12,6 +11,7 @@ import { useAppDispatch } from "@/hooks/useTypedRTK";
 import { changePauseState, setActive } from "@/store/slices/PlayerSlice";
 import Image from "next/image";
 import { setCurrentTrack } from "@/store/slices/CurrentTrackSlice";
+import styles from "../styles/TrackItem.module.scss";
 
 interface TrackItemProps {
   track: ITrack;

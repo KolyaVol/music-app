@@ -13,7 +13,7 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { useRouter } from "next/navigation";
-import { Button, ListItemButton } from "@mui/material";
+import { Button, Grid, ListItemButton } from "@mui/material";
 import Link from "next/link";
 const menuItems = [
   { text: "Главная", href: "/" },
@@ -25,39 +25,52 @@ export default function Navbar() {
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
 
+  const setBurgerClosed = setTimeout(() => {
+    console.log(1);
+
+    setOpen(false);
+  }, 300);
+
   const handleDrawerOpen = () => {
     setOpen(true);
+    clearTimeout(setBurgerClosed);
   };
 
   const handleDrawerClose = () => {
     setOpen(false);
   };
 
+  document.addEventListener("click", () => setBurgerClosed);
+
   return (
     <>
-      <AppBar color="inherit" position="fixed">
-        <Toolbar
-          sx={{
-            padding: "0 10rem",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <Link href={"/"} style={{ textDecoration: "none", color: "inherit" }}>
-            <Typography
-              sx={{ textDecoration: "none" }}
-              variant="h6"
-              noWrap
-              component="div"
-            >
-              Music App
-            </Typography>
-          </Link>
+      <AppBar color="transparent" position="fixed">
+        <Grid xs></Grid>
+        <Grid xs={10}>
+          <Toolbar
+            style={{
+              padding: "0 10rem",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <Link href={"/"} style={{ textDecoration: "none", color: "white" }}>
+              <Typography
+                sx={{ textDecoration: "none" }}
+                variant="h6"
+                noWrap
+                component="div"
+              >
+                Music App
+              </Typography>
+            </Link>
 
-          <Button>
-            <MenuIcon color="action" onClick={handleDrawerOpen} />
-          </Button>
-        </Toolbar>
+            <Button>
+              <MenuIcon color="action" onClick={handleDrawerOpen} />
+            </Button>
+          </Toolbar>
+        </Grid>
+        <Grid xs></Grid>
       </AppBar>
       <Drawer variant="persistent" anchor="left" open={open}>
         <div>

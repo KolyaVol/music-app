@@ -1,7 +1,14 @@
-
 .track {
   margin: 20px;
   padding: 10px;
   display: flex;
   align-items: center;
+  color: black;
+  div {
+    color: black;
+  }
+}
+
+.track :only-child {
+  color: black;
 }

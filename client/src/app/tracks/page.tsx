@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Box, Button, Card, Grid } from "@mui/material";
+import { Box, Button, Card, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { ITrack } from "../../types/track";
 import TrackList from "../../components/TrackList";
@@ -19,21 +19,30 @@ const Index = () => {
   //   }
 
   return (
-    <>
-      <Grid container justifyContent="center">
-        <Card style={{ width: 900 }}>
-          <Box p={3}>
-            <Grid container justifyContent="space-between">
-              <h1>Список треков</h1>
-              <Button onClick={() => router.push("/tracks/create")}>
-                Загрузить
-              </Button>
-            </Grid>
-          </Box>
-          <TrackList tracks={[]} />
-        </Card>
-      </Grid>
-    </>
+    <Grid
+      container
+      justifyContent="center"
+      sx={{ marginTop: "7rem", position: "absolute", left: 0, top: 0 }}
+      color={"black"}
+    >
+      <Card style={{ width: 900 }}>
+        <Box p={3}>
+          <Grid container justifyContent="space-between">
+            <Typography
+              fontFamily={"Times New Roman"}
+              style={{ color: "black" }}
+              variant="h3"
+            >
+              Список треков
+            </Typography>
+            <Button onClick={() => router.push("/tracks/create")}>
+              Загрузить
+            </Button>
+          </Grid>
+        </Box>
+        <TrackList tracks={[]} />
+      </Card>
+    </Grid>
   );
 };
 
