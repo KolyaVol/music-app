@@ -22,8 +22,7 @@ const Index = () => {
     <Grid
       container
       justifyContent="center"
-      sx={{ marginTop: "7rem", position: "absolute", left: 0, top: 0 }}
-      color={"black"}
+      sx={{ marginTop: "7rem", left: 0, top: 0 }}
     >
       <Card style={{ width: 900 }}>
         <Box p={3}>

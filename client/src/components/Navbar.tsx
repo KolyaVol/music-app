@@ -1,7 +1,6 @@
 "use client";
-import * as React from "react";
+import { useState, useEffect } from "react";
 import Drawer from "@mui/material/Drawer";
-import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
@@ -15,6 +14,8 @@ import MailIcon from "@mui/icons-material/Mail";
 import { useRouter } from "next/navigation";
 import { Button, Grid, ListItemButton } from "@mui/material";
 import Link from "next/link";
+import useResize from "../hooks/useResize";
+import styles from "../styles/Nav.module.scss";
 const menuItems = [
   { text: "Главная", href: "/" },
   { text: "Список треков", href: "/tracks" },
@@ -22,7 +23,8 @@ const menuItems = [
 ];
 
 export default function Navbar() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+
   const router = useRouter();
 
   const handleDrawerOpen = () => {
@@ -33,36 +35,34 @@ export default function Navbar() {
     setOpen(false);
   };
 
+  const width = useResize()[0];
+
   return (
     <>
-      <AppBar color="transparent" position="fixed">
-        <Grid xs></Grid>
-        <Grid xs={10}>
-          <Toolbar
-            style={{
-              padding: "0 10rem",
-              display: "flex",
-              justifyContent: "space-between",
-            }}
+      <header className={styles.navBar}>
+        <Link href={"/"} style={{ textDecoration: "none", color: "white" }}>
+          <Typography
+            sx={{ textDecoration: "none" }}
+            variant="h6"
+            noWrap
+            component="div"
           >
-            <Link href={"/"} style={{ textDecoration: "none", color: "white" }}>
-              <Typography
-                sx={{ textDecoration: "none" }}
-                variant="h6"
-                noWrap
-                component="div"
-              >
-                Music App
-              </Typography>
-            </Link>
-
-            <Button>
-              <MenuIcon color="action" onClick={handleDrawerOpen} />
-            </Button>
+            Music App
+          </Typography>
+        </Link>
+        {width > 500 ? (
+          <Toolbar>
+            <Button color="inherit">Tracks</Button>
+            <Button color="inherit">Albums</Button>
+            <Button color="inherit">Profile</Button>
           </Toolbar>
-        </Grid>
-        <Grid xs></Grid>
-      </AppBar>
+        ) : (
+          <Button color="inherit">
+            <MenuIcon color="inherit" onClick={handleDrawerOpen} />
+          </Button>
+        )}
+      </header>
+
       <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
         <div>
           <IconButton onClick={handleDrawerClose}>
