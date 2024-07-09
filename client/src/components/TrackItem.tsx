@@ -3,7 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import { ITrack } from "../types/track";
-import { Card, Grid, IconButton } from "@mui/material";
+import { Card, Grid, IconButton, Typography } from "@mui/material";
 import { Delete, Pause, PlayArrow } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import { deleteTrack } from "@/store/actions-creators/track";
@@ -56,13 +56,9 @@ const TrackItem: React.FC<TrackItemProps> = ({ track, active = false }) => {
         src={"http://localhost:5000/" + track.picture}
         alt={track.name}
       />
-      <Grid
-        container
-        direction="column"
-        style={{ width: 200, margin: "0 20px" }}
-      >
+      <Grid container direction="column" sx={{ margin: "0 0 0 1rem"}}>
         <div>{track.name}</div>
-        <div style={{ fontSize: 12, color: "gray" }}>{track.artist}</div>
+        <div className={styles.artist}>{track.artist}</div>
       </Grid>
       {active && <div>02:42 / 03:22</div>}
       <IconButton onClick={(e) => delTrack(e)} style={{ marginLeft: "auto" }}>

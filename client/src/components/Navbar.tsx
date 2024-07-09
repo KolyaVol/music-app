@@ -57,7 +57,7 @@ export default function Navbar() {
             <Button color="inherit">Profile</Button>
           </Toolbar>
         ) : (
-          <Button color="inherit">
+          <Button color="inherit" sx={{ padding: "0", minWidth: "24px" }}>
             <MenuIcon color="inherit" onClick={handleDrawerOpen} />
           </Button>
         )}

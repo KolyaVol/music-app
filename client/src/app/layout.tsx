@@ -25,14 +25,21 @@ export default function RootLayout({
         <StoreProvider count={0}>
           <div className={styles.bg}></div>
           <Grid container sx={{ paddingTop: "30vh" }}>
-            <Grid xs={1}></Grid>
-            <Grid container xs={10} position="relative" direction="column">
+            <Grid xs={0.25} sm={0.5} md={1}></Grid>
+            <Grid
+              container
+              xs={11.5}
+              sm={11}
+              md={10}
+              position="relative"
+              direction="column"
+            >
               <Navbar></Navbar>
 
               {children}
               <Player></Player>
             </Grid>
-            <Grid xs={1}></Grid>
+            <Grid xs={0.25} sm={0.5} md={1}></Grid>
           </Grid>
         </StoreProvider>
       </body>

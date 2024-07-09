@@ -1,5 +1,7 @@
 .body {
   background-color: gainsboro;
+  --cmn-font-size: 12px;
+  --header-font-size: 14px;
 }
 
 .bg {
@@ -11,4 +13,11 @@
   position: absolute;
   left: 0;
   top: 0;
+}
+
+@media (max-width: 700px) {
+  .body {
+    --cmn-font-size: 10px;
+    --header-font-size: 12px;
+  }
 }

@@ -1,11 +1,16 @@
 .track {
-  margin: 20px 0 ;
+  margin: 20px 0;
   padding: 10px;
   display: flex;
   align-items: center;
   color: black;
+  font-size: var(--cmn-font-size);
   div {
     color: black;
+  }
+  .artist {
+    width: fit-content;
+    margin: 0;
   }
 }
 
