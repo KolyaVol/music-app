@@ -24,7 +24,11 @@ export default function RootLayout({
       <body className={styles.body}>
         <StoreProvider count={0}>
           <div className={styles.bg}></div>
-          <Grid container sx={{ paddingTop: "30vh" }}>
+          <Grid
+            container
+            className={styles.container}
+            sx={{ paddingTop: "40vh" }}
+          >
             <Grid xs={0.25} sm={0.5} md={1}></Grid>
             <Grid
               container

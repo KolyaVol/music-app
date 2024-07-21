@@ -2,11 +2,12 @@
   background-color: gainsboro;
   --cmn-font-size: 12px;
   --header-font-size: 14px;
+  --header-height: 40vh;
 }
 
 .bg {
   background-color: blueviolet;
-  height: 30vh;
+  height: var(--header-height);
   width: 100vw;
   z-index: 1;
   width: 100vw;
@@ -14,10 +15,20 @@
   left: 0;
   top: 0;
 }
+.container {
+  padding-top: var(--header-height);
+}
 
 @media (max-width: 700px) {
   .body {
     --cmn-font-size: 10px;
     --header-font-size: 12px;
+    --header-height: 20vh;
+  }
+}
+
+@media (max-width: 400px) {
+  .body {
+    --header-height: 10vh;
   }
 }

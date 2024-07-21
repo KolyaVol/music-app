@@ -1,13 +1,26 @@
 .navBar {
+  --width: calc((100vw / 12) * 10);
   position: fixed;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: calc(1000vw / 12);
+  width: var(--width);
   height: 5rem;
   z-index: 10;
   padding: 1rem 0;
   background-color: transparent;
   color: white;
   top: 0;
+}
+
+@media (max-width: 900px) {
+  .navBar {
+    --width: calc((100vw / 12) * 11);
+  }
+}
+
+@media (max-width: 700px) {
+  .navBar {
+    padding: 0;
+  }
 }
